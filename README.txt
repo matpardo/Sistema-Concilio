@@ -1,0 +1,1 @@
+Para iniciar la aplicación hacer doble clic en el archivo "index.html" de la presente carpeta.

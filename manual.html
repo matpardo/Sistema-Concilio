@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Manual Sistema Concilio</title>
+		<!--Espacio para css -->
+		
+		<!--Espacio para scripts-->
+	</head>
+	<body>
+		<h1>Documentación exhaustiva</h1>
+		<div>
+			Manual detallado acerca de la aplicación Concilio.<br>
+		</div>
+		<div>
+			<h2>Formularios</h2>
+			Sección que trata de los formularios, sus variables y tipo de variables.<br>
+			<ul>
+			<div id="buscadordoc">
+				<li><h3>buscador</h3></li>
+				Formulario para buscar.<br>
+				Div en el que está: id="buscador"<br>
+				<b>Variables:</b><br>
+				<ol>
+					<li><h4>buscar_input</h4></li>
+						<b>Variable Obligatoria</b><br>String o Int<br>1 <= lenth(n) <= 60<br>Input de texto<br>Representa lo que se va a buscar.<br>
+					<li><h4>buscar_type</h4></li>
+						<b>Variable Obligatoria</b><br>Int<br> 1 <= n <= 4<br>Input de select.<br>Representa el tipo de elemento que se va a buscar, y significa lo que sigue:<i><br>1 Nº Mesa<br>2 RUT Master<br> 3 Nombre/Nick Master<br>4 ID jugador<br></i>
+						
+				</ol>
+			</div>
+			<div id="faddmesadoc">
+			<li><h3>faddmesa</h3></li>
+			Formulario para agregar mesas.<br>
+			Div en el que está : id="div_faddmesa" .<br><br>
+			<b>Variables:</b><br>
+			<ol>
+				<li><h4>addmesa_master</h4></li>
+					<b>Variable Obligatoria</b>.<br> Se obtiene de un select que tendrá la lista de nicks de master.<br>
+					Esta lista se obtiene desde la base de datos.<br>
+				<li><h4>addmesa_number</h4></li>
+					<b>Variable Obligatoria</b>.<br> Int<br> 0 <= n <= 9999<br> La idea es que lo asigne la Base de datos, pero actualmente es un input.<br>
+				<li><h4>addmesa_ubicacion</h4></li>
+					<b>Variable Obligatoria</b><br> String.<br> 0 < length(n) <=50<br> Input de texto<br>Representa dónde está la mesa.<br>
+				<li><h4>addmesa_capmax</h4></li>
+					<b>Variable Obligatoria</b>.<br> Int<br> 0 <= n <= 9999<br> Input de texto<br> Representa la cantidad máxima de jugadores de la mesa.<br>Se usa 0 para representar no límite.<br>
+				<li><h4>addmesa_capact</h4></li>
+					<b>Variable Obligatoria</b><br><i>Se inicia automáticamente</i><br>Int<br> 0 <= n <= 9999<br> Input hidden<br> Es la capacidad actual de jugadores registrados en la mesa.<br> Se inicia en 0.<br>
+				<li><h4>addmesa_juego</h4></li>
+					<b>Variable Obligatoria</b><br>String<br>0 < length(n) <= 50<br>Input de texto<br>Representa el nombre del juego de la mesa.<br>
+				<li><h4>addmesa_descripcion</h4></li>
+					Variable opcional (Puede ser NULL)<br>String<br> 0 <= lenght(n) <= 100<br> Input de texto<br>Representa una descripción breve del juego, (será usado en caso de juegos desconocidos).<br> Está pensado para la persona en la mesa de inscripciones.<br>
+				<li><h4>addmesa_dificultad</h4></li>
+					<b>Variable Obligatoria</b><br>Int<br> 1 <= n <= 5<br>Input de select.<br>Representa el tipo de dificultad de la mesa, y significa lo que sigue:<i><br>1 Novato<br>2 Normal<br> 3 Avanzado<br>4 Experto<br>5 Cualquiera<br></i>
+				<li><h4>addmesa_status</h4></li>
+					<b>Variable Obligatoria</b><br><i>Se inicia automáticamente</i><br>Int<br>Elemento en {0, 1}<br> Input hidden<br> Representa la variable de estado de actividad de la mesa: 0 para eliminada y 1 para activa.<br> La idea es que cuando se elimine una mesa se cambia este estado, pero no se pierde en la BD.<br>
+				<li><h4>addmesa_hora</h4></li>
+					<b>Variable Obligatoria</b><br>Int<br>0 <= n <= 23<br>Input de texto<br> Representa las horas del dia de 0 a 23, cuándo será la mesa.<br>
+				<li><h4>addmesa_min</h4></li>
+					<b>Variable Obligatoria</b><br>Int<br>0 <= n <= 59<br>Input de texto<br> Representa los minutos de una hora de 0 a 59, cuándo será la mesa.<br>
+				<li><h4>addmesa_dia</h4></li>
+					<b>Variable Obligatoria</b><br>Int<br>1 <= n <= 31<br>Input de texto<br> Representa el día de un mes de 1 a 31, cuándo será la mesa.<br>
+				<li><h4>addmesa_mes</h4></li>
+					<b>Variable Obligatoria</b><br>Int<br>1 <= n <= 12<br>Input de texto<br> Representa el mes de un año de 1 a 12, cuándo será la mesa.<br>
+				<li><h4>addmesa_year</h4></li>
+					<b>Variable Obligatoria</b><br>Int<br>1 <= n <= 9999<br>Input de texto<br> Representa el año de 1000 a 9999, cuándo será la mesa.<br>
+				<li><h4>addmesa_info</h4></li>
+					Variable opcional (puede ser NULL)<br>String<br>0 <= lenght(n) <= 300<br>Input de texto<br> Aquí se puede poner cualquier tipo de anotación de la mesa, sirve para quiénes están en la mesa de inscripción.<br>
+				<li><h4>addmesa_players</h4></li>
+					<b>Variable Obligatoria</b><br><i>Se inicia automáticamente</i><br>String<br>En la base de datos será un string tal que 1 <= length(n) <= 10000<br>Input Hidden<br>Representa la lista de jugadores de la mesa.<br>Es un estring que empieza con ":" y luego los jugadores se listarán por ejemplo ":jugador1:jugadorr2:jugador3:".<br>Se inicia en ":"<br>Este diseño es para hacerlo fácil de parsear.<br>
+			</ol>
+			</div>
+			<div id="fdelmesadoc">
+				<li><h3>fdelmesa</h3></li>
+				Formulario para borrar mesa.<br>
+				Div en el que está: id="div_fdelmesa"<br><br>
+				<b>Variables</b>:<br>
+				<ol>
+					<li><h4>delmesa_number</h4></li>
+						<b>Variable Obligatoria</b><br> Int<br> 1 <= n <=9999<br> Input de texto<br>Representa número de la mesa a borrar.<br>
+					<li><h4>delmesa_conf1</h4></li>
+						<b>Variable Obligatoria</b><br> Int<br> 1<br> Checkbox<br> Es la primera confirmación para saber si se está seguro de la operación.<br>
+					<li><h4>delmesa_conf2</h4></li>
+						<b>Variable Obligatoria</b><br> Int<br> 2<br> Checkbox<br> Es la segunda confirmación para saber si se está seguro de la operación.<br>
+				</ol>
+			</div>
+			<div id="faddmasterdoc">
+				<li><h3>faddmaster</h3></li>
+				Formulario para agregar master.<br>
+				Div en el que está: id="div_fdelmesa"<br><br>
+				<b>Variables</b>:<br>
+				<ol>
+					<li><h4>addmaster_rut</h4></li>
+						<b>Variable Obligatoria</b><br>String<br>length(n) = 9<br>Strings de la forma 12345678K o 01234567K (rut sin puntos ni guiones) que es el rut del master a agregar.<br>
+					<li><h4>addmaster_name</h4></li>
+						<b>Su obligatoriedad depende de nick</b><br>String<br>0 <= length(n) <= 50<br>Input de texto<br> Es el nombre del master.<br>
+					<li><h4>addmaster_nick</h4></li>
+						<b>Su obligatoriedad depende de nombre</b><br>String<br>0 <= length(n) <= 50<br>Input de texto<br> Es el nick del master.<br>
+					<li><h4><b>Oligatoriedad de nick o master</b></h4></li>
+						Debe ingresar o nick o nombre, si falta alguno el dato faltante se rellenará internamente con el que si está.
+				</ol>
+			</div>
+			<div id="fdelmasterdoc">
+				<li><h3>fdelmaster</h3></li>
+				Formulario para borrar master.<br>
+				Div en el que está: id="div_fdelmaster"<br><br>
+				<b>Variables</b>:<br>
+				<ol>
+					<li><h4>delmaster_rut</h4></li>
+						<b>Variable Obligatoria</b><br>String<br>length(n) = 9<br>Strings de la forma 12345678K o 01234567K (rut sin puntos ni guiones) que es el rut del master a borrar.<br>
+					<li><h4>delmaster_conf1</h4></li>
+						<b>Variable Obligatoria</b><br> Int<br> 1<br> Checkbox<br> Es la primera confirmación para saber si se está seguro de la operación.<br>
+					<li><h4>delmaster_conf2</h4></li>
+						<b>Variable Obligatoria</b><br> Int<br> 2<br> Checkbox<br> Es la segunda confirmación para saber si se está seguro de la operación.<br>
+				</ol>
+			</div>
+			<div id="faddplayerdoc">
+				<li><h3>faddplayer</h3></li>
+				Formulario para agregar jugador.<br>
+				Tener la consideración que los jugadores no se están guardando en la base de Datos, si no que se guardan en el string<br>
+				destinado para guardar la lista de jugadores en las mesas, así que si en el identificador del jugador hay ":" hay que limpiarlo (cambiarlo por otro símbolo o algo así).<br>
+				Div en el que está: id="div_faddplayer"<br><br>
+				<b>Variables</b>:<br>
+				<ol>
+					<li><h4>addplayer_mesa</h4></li>
+						<b>Variable Obligatoria</b><br> Int<br> 1 <= n <=9999<br> Input de texto<br>Representa número de la mesa a dónde se agregará el jugador.<br>
+					<li><h4>addplayer_player</h4></li>
+						<b>Variable Obligatoria</b><br>String<br>0 < length(n) <= 20<br>Input de texto<br> Identificador del jugador a agregar, suele usarse el nº de entrada.<br>
+				</ol>
+			</div>
+			<div id="fdelplayerdoc">
+				<li><h3>fdelplayer</h3></li>
+				Formulario para borrar jugador de una mesa.<br>
+				Como los jugadores no son guardados se buscará si el jugador se encuentra en el string de lista de jugadores de la mesa de la que se quiere borrar el jugador.
+				Div en el que está: id="div_fdelplayer"<br><br>
+				<b>Variables</b>:<br>
+				<ol>
+					<li><h4>delplayer_mesa</h4></li>
+						<b>Variable Obligatoria</b><br> Int<br> 1 <= n <=9999<br> Input de texto<br>Representa número de la mesa a dónde se borrará el jugador.<br>
+					<li><h4>delplayer_player</h4></li>
+						<b>Variable Obligatoria</b><br>String<br>0 < length(n) <= 20<br>Input de texto<br> Identificador del jugador a borrar.<br>
+					<li><h4>delplayer_conf1</h4></li>
+						<b>Variable Obligatoria</b><br> Int<br> 1<br> Checkbox<br> Es la primera confirmación para saber si se está seguro de la operación.<br>
+					<li><h4>delplayer_conf2</h4></li>
+						<b>Variable Obligatoria</b><br> Int<br> 2<br> Checkbox<br> Es la segunda confirmación para saber si se está seguro de la operación.<br>
+				</ol>
+			</div>
+		</ul>
+		</div>
+		<div>
+			<br>
+			<a href="documentacion.html">&#60;&#60; Volver</a>
+			<br>
+			<br>
+		</div>
+	</body>
+</html>
